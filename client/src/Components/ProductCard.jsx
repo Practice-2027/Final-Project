@@ -14,10 +14,10 @@ export default function ProductCard({
   inStock,
   onAddToCart,
   onAddToWishlist,
-  key,
+  addedToCart,
 }) {
   return (
-    <div className="product-card" key={key}>
+    <div className="product-card">
       <div className="product-header">
         <div className="card-header">
           <h2>{title}</h2>
@@ -53,7 +53,7 @@ export default function ProductCard({
       </div>
 
       <button type="button" onClick={onAddToCart} className="cart-btn">
-        Add to Cart
+        {addedToCart ? "View Cart" : "Add to Cart"}
       </button>
     </div>
   );

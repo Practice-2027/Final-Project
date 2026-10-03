@@ -8,7 +8,7 @@ import { useSearch } from "../Contexts/ContextProviders";
 
 export default function ProductList(props) {
   const { endpt,searchedTxt,selectedCategory } = useSearch();
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const { products, loading, error } = useProducts(endpt);
 
   if (loading) return <div className="product-list loading">Loading products...</div>;
@@ -34,6 +34,7 @@ export default function ProductList(props) {
             description={product.description}
             price={product.price}
             onAddToCart={() => addToCart(product)}
+            addedToCart={cartItems.some((item) => item.id === product.id)}
           />
         ))}
       </div>

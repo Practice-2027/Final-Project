@@ -1,4 +1,4 @@
-export default function CategoryCard({onClick, category, productCount, isSelected, key}) {
+export default function CategoryCard({onClick, category, productCount, isSelected}) {
   const clickable = Boolean(onClick);
   return (
     <div
@@ -7,7 +7,6 @@ export default function CategoryCard({onClick, category, productCount, isSelecte
       role={clickable ? "button" : undefined}
       tabIndex={clickable ? 0 : undefined}
       style={{ cursor: clickable ? "pointer" : "default" }} 
-      id={key}
     >
       <div className={`category-card ${isSelected ? "active" : ""}`}>
       
