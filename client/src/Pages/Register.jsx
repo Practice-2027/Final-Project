@@ -29,6 +29,7 @@ export default function Register() {
             return;
         }
         localStorage.setItem("token", token);
+        window.dispatchEvent(new Event("auth-changed"));
         navigate(
             location.state?.from?.pathname === "/login"
             ? "/dashboard"

@@ -13,6 +13,7 @@ export default function ProductCard({
   stock,
   inStock,
   onAddToCart,
+  onRemoveFromCart,
   onAddToWishlist,
   addedToCart,
 }) {
@@ -52,9 +53,15 @@ export default function ProductCard({
         </span>
       </div>
 
-      <button type="button" onClick={onAddToCart} className="cart-btn">
-        {addedToCart ? "View Cart" : "Add to Cart"}
-      </button>
+      {onRemoveFromCart ? (
+        <button type="button" onClick={onRemoveFromCart} className="cart-btn">
+          Remove from Cart
+        </button>
+      ) : (
+        <button type="button" onClick={onAddToCart} className="cart-btn">
+          {addedToCart ? "View Cart" : "Add to Cart"}
+        </button>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoute.js";
 import productRoutes from "./routes/productRoute.js";
+import cartRoutes from "./routes/cartRoute.js";
 import { requestLogger } from "./middlewares/logger.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import { HttpError } from "./utils/httpError.js";
@@ -27,6 +28,7 @@ app.use(requestLogger);
 
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
+app.use("/cart", cartRoutes);
 
 app.use((req, res, next) => {
   next(new HttpError(404, `Route ${req.originalUrl} not found`));

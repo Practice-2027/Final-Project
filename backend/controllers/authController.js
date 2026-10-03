@@ -7,6 +7,12 @@ import { validate } from "../utils/validate.js";
 
 const SALT_ROUNDS = 10;
 const TOKEN_TTL = process.env.JWT_EXPIRES_IN || "5m";
+const createToken = (user) =>
+  jwt.sign(
+    { sub: String(user.id), username: user.username, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: TOKEN_TTL }
+  );
 
 export const registerUser = async (req, res) => {
   const { username, email, password } = validate(Schema.registerSchema, req.body);
@@ -23,11 +29,13 @@ export const registerUser = async (req, res) => {
     passwordHash,
   });
   if (!user) throw new HttpError(400, "Unable to register");
+  const token = createToken(user);
 
   res.status(201).json({
     success: true,
     message: "User registered successfully",
     user,
+    token,
   });
 };
 
@@ -39,10 +47,6 @@ export const loginUser = async (req, res) => {
   const valid = user && (await bcrypt.compare(password, user.password));
   if (!valid) throw new HttpError(401, "Invalid email or password");
 
-  const token = jwt.sign(
-    { username: user.username, email: user.email },
-    process.env.JWT_SECRET,
-    { expiresIn: TOKEN_TTL }
-  );
+  const token = createToken(user);
   res.status(200).json({ message: "Login successful", token });
 };
