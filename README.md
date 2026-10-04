@@ -17,17 +17,17 @@ PostgreSQL database before deploying the frontend.
 
 ### Frontend on Vercel
 
-1. Import this GitHub repository into Vercel and use the repository root (`.`)
-   as the Root Directory.
+1. Import this GitHub repository into Vercel and set the Root Directory to
+   `client`.
 2. Add the environment variable `VITE_API_URL` with the public HTTPS URL of the
    deployed backend, with no trailing slash.
-3. Deploy. The root `vercel.json` installs the client dependencies, runs the
-   Vite build from `client/`, publishes `client/dist`, and routes browser paths
-   back to the SPA entry point.
+3. Deploy. Vercel installs dependencies with `npm ci`, runs `npm run build`,
+   publishes `dist`, and routes browser paths back to the SPA entry point.
 
 If Vercel still shows `react-scripts build`, clear any Create React App build
 command configured in Project Settings → Build and Deployment. This project
-uses Vite; its build command is `npm --prefix client run build`.
+uses Vite; when the Root Directory is `client`, its build command is
+`npm run build` and its output directory is `dist`.
 
 ### Backend and database
 
