@@ -1,8 +1,7 @@
-/** Error carrying an HTTP status code; picked up by the central error handler. */
-export class HttpError extends Error {
-  constructor(statusCode, message) {
-    super(message);
-    this.name = "HttpError";
-    this.statusCode = statusCode;
-  }
+/** Creates an error carrying an HTTP status code for the central handler. */
+export function HttpError(statusCode, message) {
+  const error = new Error(message);
+  error.name = "HttpError";
+  error.statusCode = statusCode;
+  return error;
 }

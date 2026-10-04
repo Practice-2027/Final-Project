@@ -3,7 +3,6 @@ import pg from "pg";
 
 export const schema = process.env.DB_SCHEMA;
 
-// The schema name is interpolated into SQL, so make sure it is a plain identifier.
 if (!schema || !/^[A-Za-z_][A-Za-z0-9_]*$/.test(schema)) {
   throw new Error("DB_SCHEMA is missing or invalid in .env");
 }
@@ -16,7 +15,6 @@ export const db = new pg.Pool({
   password: process.env.DB_PASSWORD,
 });
 
-// Errors on idle clients must be handled or Node will crash the process.
 db.on("error", (err) => {
   console.error("Unexpected database error:", err.message);
 });

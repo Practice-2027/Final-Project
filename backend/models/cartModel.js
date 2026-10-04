@@ -17,10 +17,10 @@ export async function initializeCartTable() {
 export async function getForUser(userId) {
   const result = await db.query(
     `SELECT products.*, cart_items.quantity
-     FROM ${CART_TABLE} AS cart_items
-     JOIN ${PRODUCTS_TABLE} AS products ON products.id = cart_items.product_id
-     WHERE cart_items.user_id = $1
-     ORDER BY products.id ASC`,
+    FROM ${CART_TABLE} AS cart_items
+    JOIN ${PRODUCTS_TABLE} AS products ON products.id = cart_items.product_id
+    WHERE cart_items.user_id = $1
+    ORDER BY products.id ASC`,
     [userId]
   );
   return result.rows;
@@ -29,8 +29,8 @@ export async function getForUser(userId) {
 export async function addForUser(userId, productId) {
   await db.query(
     `INSERT INTO ${CART_TABLE} (user_id, product_id)
-     VALUES ($1, $2)
-     ON CONFLICT (user_id, product_id) DO NOTHING`,
+    VALUES ($1, $2)
+    ON CONFLICT (user_id, product_id) DO NOTHING`,
     [userId, productId]
   );
 }
@@ -38,7 +38,7 @@ export async function addForUser(userId, productId) {
 export async function removeForUser(userId, productId) {
   await db.query(
     `DELETE FROM ${CART_TABLE}
-     WHERE user_id = $1 AND product_id = $2`,
+    WHERE user_id = $1 AND product_id = $2`,
     [userId, productId]
   );
 }

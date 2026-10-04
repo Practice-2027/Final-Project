@@ -7,6 +7,7 @@ const validId = (params) => validate(Schema.idSchema, params).id;
 
 export const getProducts = async (req, res) => {
   const products = await Model.getAll();
+  if (!products) throw new HttpError(404, "Products Data Not found");
   res.status(200).json({
     message: "Product data fetched",
     count: products.length,

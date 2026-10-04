@@ -8,6 +8,7 @@ import { requestLogger } from "./middlewares/logger.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import { HttpError } from "./utils/httpError.js";
 
+
 if (!process.env.JWT_SECRET) {
   throw new Error("JWT_SECRET is missing from .env");
 }
