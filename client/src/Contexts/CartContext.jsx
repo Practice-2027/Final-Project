@@ -1,8 +1,9 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import API_BASE_URL from "../api.js";
 
 const CartContext = createContext();
-const CART_URL = "http://localhost:4000/cart";
+const CART_URL = `${API_BASE_URL}/cart`;
 
 export function CartProvider({children}) {
     const [token, setToken] = useState(() => localStorage.getItem("token"));
